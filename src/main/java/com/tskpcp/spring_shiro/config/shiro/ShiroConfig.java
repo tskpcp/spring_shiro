@@ -1,11 +1,13 @@
 package com.tskpcp.spring_shiro.config.shiro;
 
+import com.tskpcp.spring_shiro.config.MySessionManager;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.HandlerExceptionResolver;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -65,9 +67,9 @@ public class ShiroConfig {
         //设置realm
         securityManager.setRealm(myShiroRealm());
         // 自定义session管理 使用redis
-//        securityManager.setSessionManager();
+       // securityManager.setSessionManager();
         // 自定义缓存实现 使用redis
-        //securityManager.setCacheManager();
+      //  securityManager.setCacheManager();
         return securityManager;
     }
     /**
@@ -75,7 +77,8 @@ public class ShiroConfig {
      */
     @Bean
     public SessionManager sessionManager(){
-        MySession
+        MySessionManager mySessionManager=new MySessionManager();
+        mySessionManager.
     }
     /**
      * 配置shiro redisManager
@@ -98,4 +101,8 @@ public class ShiroConfig {
     /**
      * 注册全局异常处理
      */
+    @Bean(name="exceptionHandler")
+    public HandlerExceptionResolver handlerExceptionResolver(){
+        return new My
+    }
 }
